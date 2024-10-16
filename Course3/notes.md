@@ -14,8 +14,6 @@
 
 ## Introduction to Attention Mechanism
 
-The video introduces the concept of attention mechanisms, focusing on how they operate in language translation and word embedding applications. The main analogy compares attention mechanisms to how humans focus on relevant conversations amidst background noise, highlighting the relevance of focusing on important parts of the input data.
-
 **Understanding Attention Mechanism through an Example**
 
 An analogy using Python dictionaries demonstrates how attention works. Just like a dictionary maps keys (French words) to values (English translations), the attention mechanism uses **query, key, and value matrices** to map input sequences to their translated outputs.
@@ -45,6 +43,22 @@ When applying attention to sequences, all query vectors can be consolidated into
 
 In real-world applications like **transformers**, positional encodings are often added to maintain the order of words in the sequence, but for simpler tasks, they might not be necessary.
 
----
+The self-attention mechanism is central to language modeling and the foundation of transformers. After watching this video, you'll be able to describe sequence and context embedding and explain how self-attention aids in predicting tokens in natural language processing (NLP).
 
-This summary captures the essence of attention mechanisms and provides a clear explanation of how they are used in NLP tasks like translation.
+### Key Concepts:
+
+1. **Simple Language Modeling**: In self-attention, predicting the next word in a sequence depends on the relationship between the input words. Changing the context alters the prediction, as illustrated in examples like "not like" predicting "hate" and "do like" predicting "like." The input words are converted into matrices, where each word corresponds to a column vector representing its embedding.
+
+2. **Query, Key, and Value Matrices**: Self-attention generates three key components—query (Q), key (K), and value (V)—from the input word embeddings using learnable parameters. These matrices allow the mechanism to refine the input embeddings into enhanced or contextual embeddings.
+
+3. **Matrix Operations**: The core of self-attention involves multiplying the query matrix by the key matrix, applying the softmax function to normalize attention scores, and then multiplying with the value matrix. This process generates a new matrix of refined embeddings that represent the context of each word.
+
+4. **Efficiency and Parallelization**: Self-attention mechanisms can process data efficiently using GPUs, enabling parallel computations. This is one reason self-attention outperforms sequential models like RNNs.
+
+5. **Final Output**: After calculating attention scores and enhancing the embeddings, the model generates logits, which are passed through a softmax function during training to predict the next word. The argmax function then selects the token with the highest probability, revealing the model's prediction.
+
+6. **Attention Scores**: These scores highlight the relationships between tokens, helping the model focus on relevant parts of the input sequence. For instance, attention scores for phrases like "not like" and "not hate" demonstrate how self-attention adjusts the focus to predict the next word based on context.
+
+### Recap:
+The self-attention mechanism enhances word embeddings by using the query, key, and value matrices. It improves predictions in language modeling by transforming word sequences into contextual embeddings and efficiently processing these through parallel computation.
+
