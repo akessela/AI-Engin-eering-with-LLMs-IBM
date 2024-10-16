@@ -62,3 +62,31 @@ The self-attention mechanism is central to language modeling and the foundation 
 ### Recap:
 The self-attention mechanism enhances word embeddings by using the query, key, and value matrices. It improves predictions in language modeling by transforming word sequences into contextual embeddings and efficiently processing these through parallel computation.
 
+## The transfomer architecture
+
+### Key Concepts:
+
+1. **Scaled Dot-Product Attention**:
+   - Involves matrix multiplications of queries (Q), keys (K), and values (V), with a scaling factor to control the dot-product size.
+   - Masking may be used depending on the task, and the final output is derived by multiplying the attention scores with the values.
+   - Q, K, and V matrices are obtained by multiplying the input embeddings by learnable parameters.
+
+2. **Multihead Attention**:
+   - Executes multiple scaled dot-product attention processes in parallel, called heads. Each head focuses on different dependencies within the sequence.
+   - Example: For the phrase "heavy snow makes driving more difficult," different heads focus on dependencies like "makes" and "difficult."
+   - The outputs of multiple heads are concatenated and passed through a final linear layer. The number of heads is a hyperparameter, and the input dimension must be divisible by the number of heads.
+   - PyTorch’s `nn.MultiheadAttention` can be used to initialize multihead attention layers.
+
+3. **Transformer Architecture**:
+   - Consists of **encoders** and **decoders**:
+     - **Encoder**: Uses multihead attention followed by normalization (add and norm), then applies a feed-forward network and another add and norm step. Encoders do not mask attention.
+     - **Decoder**: Includes masked multihead attention (to prevent looking ahead in the sequence) and cross-attention layers for tasks like language translation.
+   - Transformers use positional encodings to account for the order of words in sequences.
+
+4. **Stacking Transformer Layers**:
+   - Multiple transformer layers (encoders) can be stacked in series to model complex relationships in data. This allows deeper learning of the input sequence.
+   - In PyTorch, you can specify the number of attention heads, embedding dimensions, and layers, then pass inputs sequentially through the transformer.
+
+### Recap:
+The scaled dot-product attention mechanism multiplies Q, K, and V matrices with a scaling factor and sometimes a mask. Multihead attention allows parallel processing of multiple attention heads. Transformers, which stack attention layers, are powerful for modeling complex data relationships. The video also demonstrates how to implement these mechanisms in PyTorch, including multihead attention and transformer encoders.
+
